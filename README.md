@@ -1,13 +1,5 @@
 # Shopping Cart Project
 
-## Usage
-
-Run the program:
-
-```sh
-python shopping_cart.py
-```
-
 ## Setup
 
 Create a virtual environment:
@@ -32,4 +24,12 @@ Set up local ".env" file to configure your own tax rate via an environment varia
 ```sh
  # example of the ".env" file...
  TAX_RATE=0.09 #enter tax rate here
+```
+
+## Usage
+
+Run the program:
+
+```sh
+python shopping_cart.py
 ```
