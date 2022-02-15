@@ -30,25 +30,20 @@ def to_usd(my_price):
     return f"${my_price:,.2f}"  # > $12,000.71
 
 #INFO CAPTURE / INPUT
+
+total_price = 0
+
 while True:
     product_id = input("Please input a product identifier, or 'DONE' if there are no more items: ")
     # "DONE"
     if product_id == "DONE":
         break
+    else:
+        matching_products = [p for p in products if str(p["id"]) == str(product_id)]
+        matching_product = matching_products[0]
+        total_price = total_price + matching_product["price"]
+        print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
 
-    # LOOK UP CORRESPONDING PRODUCTS
+#INFO DISPLAY / OUTPUT
 
-    matching_products = [p for p in products if str(p["id"]) == str(product_id)]
-    #matching_products = []
-
-    #for x in products:
-        #if str(x["id"]) == str(product_id):
-            # this is a match
-            #matching_products.append(x)
-
-    #print(matching_products)
-    #print(type(matching_products))
-    #print(len(matching_products))
-    # print the name of the matching product
-    matching_product = matching_products[0]
-    print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
+print("TOTAL PRICE: " + str(total_price))
