@@ -4,6 +4,7 @@ import datetime as dt
 import os
 from dotenv import load_dotenv
 
+#invoking this function loads contents of the ".env" file into the script's environment
 load_dotenv()
 
 products = [

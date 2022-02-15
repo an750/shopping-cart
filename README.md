@@ -16,10 +16,14 @@ Create a virtual environment:
 conda create -n shopping-env python=3.8
 ```
 
-## Activate the virtual environment:
-
+Activate the virtual environment:
 ```sh
 conda activate shopping-env
+```
+
+Install package dependencies:
+```sh
+pip install -r requirements.txt
 ```
 
 ## ".env" file
@@ -27,5 +31,5 @@ conda activate shopping-env
 Set up local ".env" file to configure your own tax rate via an environment variable called TAX_RATE
 ```sh
  # example of the ".env" file...
- TAX_RATE=0.09
+ TAX_RATE=0.09 #enter tax rate here
 ```
