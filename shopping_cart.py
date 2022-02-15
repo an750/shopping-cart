@@ -1,5 +1,7 @@
 # shopping_cart.py
 
+import datetime as dt
+
 products = [
     {"id": 1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id": 2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -29,8 +31,9 @@ def to_usd(my_price):
     """
     return f"${my_price:,.2f}"  # > $12,000.71
 
-#INFO CAPTURE / INPUT
+# INFO CAPTURE / INPUT
 
+checkout_time = dt.datetime.now()
 total_price = 0
 product_ids = []
 
@@ -42,8 +45,15 @@ while True:
     else:
         product_ids.append(product_id)
 
+# INFO DISPLAY / OUTPUT
 
-#INFO DISPLAY / OUTPUT
+print("---------------------------------")
+print("NESTLE GROCERY")
+print("WWW.NESTLE-GROCERY.COM")
+print("---------------------------------")
+# datetime formatting
+print("CHECKOUT AT: " + checkout_time.strftime("%Y-%m-%d %I:%M %p"))
+print("---------------------------------")
 
 for product_id in product_ids:
     matching_products = [p for p in products if str(p["id"]) == str(product_id)]
