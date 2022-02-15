@@ -1,8 +1,5 @@
 # shopping_cart.py
 
-from ast import While
-
-
 products = [
     {"id": 1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id": 2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -38,10 +35,7 @@ def to_usd(my_price):
     """
     return f"${my_price:,.2f}"  # > $12,000.71
 
-
 #TODO: write some Python code here to produce the desired output
-
-#print(products)
 
 while True:
 
