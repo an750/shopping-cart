@@ -26,45 +26,29 @@ products = [
 def to_usd(my_price):
     """
     Converts a numeric value to usd-formatted string, for printing and display purposes.
-
-    Param: my_price (int or float) like 4000.444444
-
-    Example: to_usd(4000.444444)
-
-    Returns: $4,000.44
     """
     return f"${my_price:,.2f}"  # > $12,000.71
 
-#TODO: write some Python code here to produce the desired output
-
+#INFO CAPTURE / INPUT
 while True:
-
-    # ASK FOR USER INPUT
-
-    product_id = input("Please input a product identifier: ")
-    print(product_id)
-    print(type(product_id))
+    product_id = input("Please input a product identifier, or 'DONE' if there are no more items: ")
+    # "DONE"
     if product_id == "DONE":
         break
 
     # LOOK UP CORRESPONDING PRODUCTS
 
-    # Print product that has an id attribute equal to "9"
+    matching_products = [p for p in products if str(p["id"]) == str(product_id)]
+    #matching_products = []
 
-    matching_products = []
-
-    for x in products:
-        #if x == 3:
-        #    ___.append(x)
-        #print(x)
-        #print(x["id"])
-        if str(x["id"]) == str(product_id):
+    #for x in products:
+        #if str(x["id"]) == str(product_id):
             # this is a match
-            matching_products.append(x)
+            #matching_products.append(x)
 
     #print(matching_products)
     #print(type(matching_products))
     #print(len(matching_products))
     # print the name of the matching product
     matching_product = matching_products[0]
-    print(matching_product["name"], matching_product["price"])
+    print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
