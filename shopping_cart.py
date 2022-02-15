@@ -38,6 +38,11 @@ def to_usd(my_price):
 
 # INFO CAPTURE / INPUT
 
+# for validation process
+valid_ids = []
+for x in products:
+    valid_ids.append(str(x["id"]))
+
 # current date / time
 checkout_time = dt.datetime.now()
 subtotal = 0
@@ -46,8 +51,10 @@ product_ids = []
 while True:
     product_id = input("Please input a product identifier, or 'DONE' if there are no more items: ")
     # "DONE"
-    if product_id == "DONE":
+    if product_id.upper() == "DONE":
         break
+    elif product_id not in valid_ids:
+        print("Hey, are you sure that product identifier is correct? Please try again!")
     else:
         product_ids.append(product_id)
 
