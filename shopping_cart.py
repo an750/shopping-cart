@@ -33,6 +33,7 @@ def to_usd(my_price):
 
 # INFO CAPTURE / INPUT
 
+# current date / time
 checkout_time = dt.datetime.now()
 subtotal = 0
 product_ids = []
@@ -68,7 +69,7 @@ for product_id in product_ids:
 tax_rate = 0.0875
 tax_total = subtotal * tax_rate
 
-# total price
+# total cost
 total = subtotal + tax_total
 
 print("---------------------------------")
