@@ -32,6 +32,7 @@ def to_usd(my_price):
 #INFO CAPTURE / INPUT
 
 total_price = 0
+product_ids = []
 
 while True:
     product_id = input("Please input a product identifier, or 'DONE' if there are no more items: ")
@@ -39,11 +40,25 @@ while True:
     if product_id == "DONE":
         break
     else:
-        matching_products = [p for p in products if str(p["id"]) == str(product_id)]
-        matching_product = matching_products[0]
-        total_price = total_price + matching_product["price"]
-        print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
+        product_ids.append(product_id)
+
 
 #INFO DISPLAY / OUTPUT
 
-print("TOTAL PRICE: " + str(total_price))
+for product_id in product_ids:
+    matching_products = [p for p in products if str(p["id"]) == str(product_id)]
+    matching_product = matching_products[0]
+    total_price = total_price + matching_product["price"]
+    print("SELECTED PRODUCT: " + matching_product["name"] + " " + str(matching_product["price"]))
+
+print("TOTAL PRICE: " + str(total_price)) #format USD
+
+
+#A grocery store name of your choice
+#A grocery store phone number and/or website URL and/or address of choice
+#The date and time of the beginning of the checkout process, formatted in a human-friendly way (e.g. 2020-02-07 03:54 PM)
+#The name and price of each shopping cart item, price being formatted as US dollars and cents (e.g. $3.50, etc.)
+#The total cost of all shopping cart items (i.e. the "subtotal"), formatted as US dollars and cents (e.g. $19.47), calculated as the sum of their prices
+#The amount of tax owed (e.g. $1.70), calculated by multiplying the total cost by a New York City sales tax rate of 8.75% (for the purposes of this project, groceries are not exempt from sales tax)
+#The total amount owed, formatted as US dollars and cents (e.g. $21.17), calculated by adding together the amount of tax owed plus the total cost of all shopping cart items
+#A friendly message thanking the customer and/or encouraging the customer to shop again
