@@ -3,6 +3,8 @@
 import datetime as dt
 import os
 from dotenv import load_dotenv
+from sendgrid import SendGridAPIClient
+from sendgrid.helpers.mail import Mail
 
 #invoking this function loads contents of the ".env" file into the script's environment
 load_dotenv()
@@ -45,6 +47,7 @@ for x in products:
 
 # current date / time
 checkout_time = dt.datetime.now()
+checkout_time2 = checkout_time.strftime("%Y-%m-%d %I:%M %p")
 subtotal = 0
 product_ids = []
 
@@ -52,6 +55,7 @@ while True:
     product_id = input("Please input a product identifier, or 'DONE' if there are no more items: ")
     # "DONE"
     if product_id.upper() == "DONE":
+        customer_email = input("Enter email for a digital copy of your receipt. Otherwise enter 'N': ")
         break
     elif product_id not in valid_ids:
         print("Hey, are you sure that product identifier is correct? Please try again!")
@@ -66,7 +70,7 @@ print("NESTLE GROCERY")
 print("WWW.NESTLE-GROCERY.COM")
 print("---------------------------------")
 # datetime formatting - beginning of checkout process
-print("CHECKOUT AT: " + checkout_time.strftime("%Y-%m-%d %I:%M %p"))
+print("CHECKOUT AT: " + checkout_time2)
 print("---------------------------------")
 print("SELECTED PRODUCTS:")
 
@@ -92,3 +96,37 @@ print("---------------------------------")
 # friendly message
 print("THANKS, SEE YOU AGAIN SOON!")
 print("---------------------------------")
+
+# Sending Receipts via Email
+#https: // github.com/prof-rossetti/intro-to-python/blob/main/notes/python/packages/sendgrid.md
+
+if customer_email == "N":
+    pass
+else:
+    SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", default="OOPS, please set env var called 'SENDGRID_API_KEY'")
+    SENDER_ADDRESS = os.getenv("SENDER_ADDRESS", default="OOPS, please set env var called 'SENDER_ADDRESS'")
+    store_email = SENDER_ADDRESS
+
+    client = SendGridAPIClient(SENDGRID_API_KEY)
+
+    subject = "Your Receipt from Nestle Grocery Store - WWW.NESTLE-GROCERY.COM"
+    content1 = "CHECKOUT AT: ", checkout_time2
+    content2 = "SUBTOTAL: ", to_usd(subtotal)
+    content3 = "TAX: ", to_usd(tax_total)
+    content4 = "TOTAL: ", to_usd(total)
+    content5 = "THANKS, SEE YOU AGAIN SOON!"
+    content = content1, content2, content3, content4, content5
+
+    message = Mail(from_email=store_email, to_emails=customer_email, subject=subject, html_content=content)
+
+    try:
+        response = client.send(message)
+        # > <class 'python_http_client.client.Response'>
+        print("RESPONSE:", type(response))
+        print(response.status_code)  # > 202 indicates SUCCESS
+        print(response.body)
+        print(response.headers)
+
+    except Exception as err:
+        print(type(err))
+        print(err)
