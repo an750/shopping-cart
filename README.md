@@ -33,6 +33,9 @@ Set up a local ".env" file to configure your own tax rate, email adress, and Sen
  SENDGRID_TEMPLATE_ID="ex123" #enter your own SendGrid API Key
 ```
 
+## ".csv" file
+To use your own custom CSV file inventory, copy the provided "data/default_products.csv" file into your local repo as "data/products.csv", where the program will be looking for it.
+
 ## Usage
 
 Run the program:
